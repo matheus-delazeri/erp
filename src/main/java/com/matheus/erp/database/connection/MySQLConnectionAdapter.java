@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 // TODO: Fix SQL Injection
 public class MySQLConnectionAdapter extends ConnectionAdapter {
