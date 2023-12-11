@@ -17,7 +17,7 @@ public class Collection implements Iterable<HashMap<String, String>> {
     /**
      * e.g: "column_name" => "> 10"
      */
-    private final HashMap<String, String> columnFilters = new HashMap<>();
+    private final ArrayList<String> columnFilters = new ArrayList<>();
 
     public Collection(String table) {
         this.table = table;
@@ -27,7 +27,7 @@ public class Collection implements Iterable<HashMap<String, String>> {
      * @param expression Can be used for comparative filtering. e.g: ">", "=", "<"
      */
     public Collection addColumnFilter(String column, String expression) {
-        columnFilters.put(column, expression);
+        columnFilters.add(column + " " + expression);
 
         return this;
     }

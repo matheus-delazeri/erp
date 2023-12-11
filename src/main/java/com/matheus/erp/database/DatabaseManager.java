@@ -4,6 +4,7 @@ import com.matheus.erp.database.connection.ConnectionAdapter;
 import com.matheus.erp.database.connection.MySQLConnectionAdapter;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -30,7 +31,7 @@ public class DatabaseManager {
     }
 
 
-    public ResultSet select(String table, HashMap<String, String> columnFilters) {
+    public ResultSet select(String table, ArrayList<String> columnFilters) {
         try {
             PreparedStatement statement = adapter.prepareSelect(table, columnFilters);
 
@@ -38,6 +39,26 @@ public class DatabaseManager {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void insert(String table, HashMap<String, String> data)
+    {
+        try {
+            PreparedStatement statement = adapter.prepareInsert(table, data);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(String table, String pkColumn, String pk, HashMap<String, String> data)
+    {
+        try {
+            PreparedStatement statement = adapter.prepareUpdate(table, pkColumn, pk, data);
+            statement.executeUpdate();
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

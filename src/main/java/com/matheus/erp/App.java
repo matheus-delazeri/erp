@@ -9,19 +9,20 @@ import java.util.HashMap;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
+public class App {
     public static DatabaseManager dbManager;
 
-    public static void main( String[] args ) throws SQLException {
+    public static void main(String[] args) throws SQLException {
         dbManager = new DatabaseManager();
         ProductModel product = new ProductModel();
         Collection collection = product.getCollection();
+        collection.addColumnFilter("price", "> 20");
+        collection.addColumnFilter("price", "< 45");
 
         for (HashMap<String, String> row : collection) {
             System.out.println(row.get("name"));
         }
+
     }
 }
