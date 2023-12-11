@@ -26,5 +26,9 @@ public class App {
 
         product.set(productData).save();
 
+        ProductModel product1 = (ProductModel) ModelFactory.getSingleton("product.ProductModel");
+
+        System.out.println(product.get("name"));
+
     }
 }
