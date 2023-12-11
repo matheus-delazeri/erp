@@ -2,7 +2,6 @@ package com.matheus.erp.model;
 
 import com.matheus.erp.App;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -10,29 +9,41 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-// Iterator
+/**
+ * Collection class representing a collection of database records.
+ * Implements Iterable to allow iteration over the collection.
+ */
 public class Collection implements Iterable<HashMap<String, String>> {
 
     private final String table;
-    /**
-     * e.g: "column_name" => "> 10"
-     */
     private final ArrayList<String> columnFilters = new ArrayList<>();
 
+    /**
+     * Constructor for Collection, initializing with the specified table.
+     *
+     * @param table The name of the database table.
+     */
     public Collection(String table) {
         this.table = table;
     }
 
     /**
-     * @param expression Can be used for comparative filtering. e.g: ">", "=", "<"
+     * Adds a filter for a column using a comparative expression.
+     *
+     * @param column     The name of the column to filter.
+     * @param expression The comparative expression to apply (e.g., "> 10", "= 1", "< 20").
+     * @return The modified Collection instance with the added filter.
      */
     public Collection addColumnFilter(String column, String expression) {
         columnFilters.add(column + " " + expression);
-
         return this;
     }
 
-
+    /**
+     * Provides an iterator to iterate over the collection of records.
+     *
+     * @return An Iterator instance for iterating over records.
+     */
     @Override
     public Iterator<HashMap<String, String>> iterator() {
         return new Iterator<>() {
@@ -82,5 +93,5 @@ public class Collection implements Iterable<HashMap<String, String>> {
             }
         };
     }
-
 }
+
