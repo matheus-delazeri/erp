@@ -20,7 +20,7 @@ public class MySQLConnectionAdapter extends ConnectionAdapter {
         if (columnFilters != null && !columnFilters.isEmpty()) {
             queryBuilder.append("WHERE ");
             for (String filterExpression : columnFilters) {
-                // TODO: Only accept AND filter for now
+                // TODO: Accept "OR" filters also
                 queryBuilder.append(filterExpression).append(" AND ");
             }
         }

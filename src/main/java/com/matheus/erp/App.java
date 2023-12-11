@@ -1,11 +1,10 @@
 package com.matheus.erp;
 
 import com.matheus.erp.database.DatabaseManager;
-import com.matheus.erp.model.Collection;
-import com.matheus.erp.product.ProductModel;
+import com.matheus.erp.model.AbstractModel;
+import com.matheus.erp.model.ModelFactory;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 
 /**
  * Hello world!
@@ -15,14 +14,9 @@ public class App {
 
     public static void main(String[] args) throws SQLException {
         dbManager = new DatabaseManager();
-        ProductModel product = new ProductModel();
-        Collection collection = product.getCollection();
-        collection.addColumnFilter("price", "> 20");
-        collection.addColumnFilter("price", "< 45");
+        AbstractModel product = ModelFactory.getModel("product.ProductModel");
 
-        for (HashMap<String, String> row : collection) {
-            System.out.println(row.get("name"));
-        }
+        System.out.println(product.load("1").get("name"));
 
     }
 }

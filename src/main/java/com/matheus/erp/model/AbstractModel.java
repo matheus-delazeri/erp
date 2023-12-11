@@ -12,15 +12,17 @@ public abstract class AbstractModel {
         return getResource().getCollection();
     }
 
-    public void load(String id)
+    public AbstractModel load(String id)
     {
         Collection collection = getCollection();
         collection.addColumnFilter(getResource().getPkColumn(), "= " + id);
 
         for (HashMap<String, String> row : collection) {
             data = row;
-            break;
+            return this;
         }
+
+        return null;
     }
 
     public String get(String column)
