@@ -1,11 +1,11 @@
 package com.matheus.erp.model;
 
-public abstract class Resource {
+public class AbstractResource {
 
     private final String table;
     private final String pkColumn;
 
-    public Resource(String table, String pkColumn)
+    public AbstractResource(String table, String pkColumn)
     {
         this.table = table;
         this.pkColumn = pkColumn;
@@ -15,5 +15,9 @@ public abstract class Resource {
         return table;
     }
 
+    public Collection getCollection()
+    {
+        return new Collection(table);
+    }
 
 }
