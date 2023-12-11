@@ -1,0 +1,5 @@
+com/matheus/erp/database/connection/MySQLConnectionAdapter.class
+com/matheus/erp/database/connection/ConnectionAdapter.class
+com/matheus/erp/model/Resource.class
+com/matheus/erp/model/Collection$1.class
+com/matheus/erp/model/Collection.class
