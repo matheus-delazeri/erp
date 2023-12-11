@@ -12,10 +12,10 @@ public abstract class AbstractModel {
         return getResource().getCollection();
     }
 
-    public AbstractModel load(String id)
+    public AbstractModel load(String id, String column)
     {
         Collection collection = getCollection();
-        collection.addColumnFilter(getResource().getPkColumn(), "= " + id);
+        collection.addColumnFilter(column, "= " + id);
 
         for (HashMap<String, String> row : collection) {
             data = row;
@@ -25,9 +25,19 @@ public abstract class AbstractModel {
         return null;
     }
 
+    public AbstractModel load(String id)
+    {
+        return load(id, getResource().getPkColumn());
+    }
+
     public String get(String column)
     {
         return data.get(column);
+    }
+
+    public String getId()
+    {
+        return this.get(getResource().getPkColumn());
     }
 
     public AbstractModel set(String column, String value)
@@ -49,7 +59,7 @@ public abstract class AbstractModel {
     public boolean save()
     {
         try {
-            getResource().save(data);
+            data = getResource().save(data);
             return true;
         } catch (Exception e){
             return false;

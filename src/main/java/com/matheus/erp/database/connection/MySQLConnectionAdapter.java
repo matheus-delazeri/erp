@@ -3,6 +3,7 @@ package com.matheus.erp.database.connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class MySQLConnectionAdapter extends ConnectionAdapter {
         queryBuilder.delete(queryBuilder.length() - 2, queryBuilder.length()); // Removing the extra comma and space
         queryBuilder.append(")");
 
-        PreparedStatement preparedStatement = connection.prepareStatement(queryBuilder.toString());
+        PreparedStatement preparedStatement = connection.prepareStatement(queryBuilder.toString(), Statement.RETURN_GENERATED_KEYS);
 
         int paramIndex = 1;
         for (String value : data.values()) {

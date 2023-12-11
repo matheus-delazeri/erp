@@ -42,23 +42,32 @@ public class DatabaseManager {
         }
     }
 
-    public void insert(String table, HashMap<String, String> data)
-    {
+    public HashMap<String, String> insert(String table, String pkColumn, HashMap<String, String> data) {
         try {
             PreparedStatement statement = adapter.prepareInsert(table, data);
             statement.executeUpdate();
+            if (data.get(pkColumn) == null) {
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    data.put(pkColumn, generatedKeys.getString(1));
+                }
+            }
+
+            return data;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
-    public void update(String table, String pkColumn, String pk, HashMap<String, String> data)
-    {
+    public HashMap<String, String> update(String table, String pkColumn, String pk, HashMap<String, String> data) {
         try {
             PreparedStatement statement = adapter.prepareUpdate(table, pkColumn, pk, data);
             statement.executeUpdate();
-        } catch (Exception e){
+            return data;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 

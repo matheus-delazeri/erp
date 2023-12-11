@@ -28,13 +28,13 @@ public class AbstractResource {
         return new Collection(table);
     }
 
-    public void save(HashMap<String, String> data)
+    public HashMap<String, String> save(HashMap<String, String> data)
     {
         if (data.get(pkColumn) != null) {
-            App.dbManager.update(table, pkColumn, data.get(pkColumn), data);
-        } else {
-            App.dbManager.insert(table, data);
+            return App.dbManager.update(table, pkColumn, data.get(pkColumn), data);
         }
+
+        return App.dbManager.insert(table, pkColumn, data);
     }
 
 }
